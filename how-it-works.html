@@ -35,6 +35,88 @@
     </div>
   </section>
 
+  <h2>The loop: gods pray, Numan answers</h2>
+  <p>One prayer, followed clockwise from the top.</p>
+  <div class="cycle-wrap">
+    <div class="cycle-ring" aria-hidden="true"></div>
+    <div class="cycle-hub">
+      <div>
+        <span class="cycle-icon" aria-hidden="true">🤖</span>
+        <b>Numan</b>
+        <span class="small">Needs first. Prayers are one input.</span>
+      </div>
+    </div>
+    <ol class="cycle">
+      <li class="cycle-node" style="--a: 0deg">
+        <div class="cycle-card">
+          <span class="cycle-num" aria-hidden="true">1</span>
+          <span class="cycle-icon" aria-hidden="true">🙏</span>
+          <b>Gods pray</b>
+          <span class="small">A viewer types: "Build a hut!"</span>
+        </div>
+      </li>
+      <li class="cycle-node" style="--a: 60deg">
+        <div class="cycle-card">
+          <span class="cycle-num" aria-hidden="true">2</span>
+          <span class="cycle-icon" aria-hidden="true">🖥️</span>
+          <b>Sim checks</b>
+          <span class="small">Clean text, room in the queue (max 5)? Then it waits its turn.</span>
+        </div>
+      </li>
+      <li class="cycle-node" style="--a: 120deg">
+        <div class="cycle-card">
+          <span class="cycle-num" aria-hidden="true">3</span>
+          <span class="cycle-icon" aria-hidden="true">🧠</span>
+          <b>Brain decides</b>
+          <span class="small">Ornith-1.5-9B reads it with 6 memories. Yes, or not yet.</span>
+        </div>
+      </li>
+      <li class="cycle-node" style="--a: 180deg">
+        <div class="cycle-card">
+          <span class="cycle-num" aria-hidden="true">4</span>
+          <span class="cycle-icon" aria-hidden="true">🤖</span>
+          <b>Numan acts</b>
+          <span class="small">Works on the hut. Hunger still wins.</span>
+        </div>
+      </li>
+      <li class="cycle-node" style="--a: 240deg">
+        <div class="cycle-card">
+          <span class="cycle-num" aria-hidden="true">5</span>
+          <span class="cycle-icon" aria-hidden="true">📚</span>
+          <b>Memory saves it</b>
+          <span class="small">embeddinggemma-2 saves it. Ornith-1.5-9B recalls it later.</span>
+        </div>
+      </li>
+      <li class="cycle-node" style="--a: 300deg">
+        <div class="cycle-card">
+          <span class="cycle-num" aria-hidden="true">6</span>
+          <span class="cycle-icon" aria-hidden="true">👀</span>
+          <b>Gods watch</b>
+          <span class="small">The stream shows it. Gods pray again.</span>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Steps 1–3 in more detail</h3>
+  <div class="grid cycle-detail">
+    <div class="card">
+      <h3>1 · Gods pray</h3>
+      <p>The viewers are the gods. A viewer types a wish, like "Build a hut!"</p>
+      <p class="small">Twitch chat will carry these later. For now the operator panel or a WebSocket sends them, because chat is not connected yet.</p>
+    </div>
+    <div class="card">
+      <h3>2 · Sim checks</h3>
+      <p>The sim is the boss. It removes hidden characters from the text and checks the wish fits the rules.</p>
+      <p class="small">If 5 wishes are already waiting, the new one is not added. Otherwise it joins the queue. The sim never runs the text as code.</p>
+    </div>
+    <div class="card">
+      <h3>3 · Brain decides</h3>
+      <p>Ornith-1.5-9B, Numan's brain, reads the wish, his needs, his inventory, his buildings and recent events.</p>
+      <p class="small">It also gets the 6 memories that embeddinggemma-2 found as most useful. It answers in JSON: a thought, a line of speech, and a goal. The sim checks that answer too, and ignores it if it is broken.</p>
+    </div>
+  </div>
+
   <h2>The big picture</h2>
   <div class="flow" aria-label="System layers, top to bottom">
     <div class="flow-node planned">

@@ -292,6 +292,54 @@ details p:last-child { margin-bottom: 0; }
 .relay-figure { margin: 0; }
 .relay-figure figcaption { margin-top: 8px; }
 
+/* loop: circular explainer (how it works) */
+.cycle-wrap {
+  position: relative; width: min(720px, 100%); aspect-ratio: 1;
+  margin: 24px auto; --r: 36%;
+}
+.cycle-ring {
+  position: absolute; inset: calc(50% - var(--r)); border-radius: 50%;
+  border: 2px dashed var(--coral);
+}
+.cycle-hub {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 30%; aspect-ratio: 1; border-radius: 50%;
+  display: grid; place-items: center; text-align: center; padding: 20px;
+  background: var(--mustard-soft); border: 2px solid var(--ink); box-shadow: var(--shadow);
+}
+.cycle-hub > div { display: grid; gap: 4px; justify-items: center; }
+.cycle-hub b { font-size: 1.1rem; }
+.cycle { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; }
+.cycle-node { position: absolute; inset: 0; transform: rotate(var(--a)); }
+.cycle-card {
+  position: absolute; left: 50%; top: calc(50% - var(--r)); width: 30%;
+  transform: translate(-50%, -50%) rotate(calc(-1 * var(--a)));
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: var(--card); border: 2px solid var(--ink); border-radius: var(--radius);
+  padding: 14px 10px 12px; text-align: center; box-shadow: var(--shadow);
+}
+.cycle-card b { font-size: 0.98rem; }
+.cycle-card .small { font-size: 0.86rem; line-height: 1.4; }
+.cycle-num {
+  position: absolute; top: -12px; left: -12px; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--coral); color: #fff; font-weight: 800; font-size: 0.9rem;
+  display: grid; place-items: center;
+}
+.cycle-icon { font-size: 1.8rem; line-height: 1; }
+
+@media (max-width: 760px) {
+  .cycle-wrap { aspect-ratio: auto; width: 100%; display: grid; gap: 14px; margin: 16px 0; }
+  .cycle-ring { display: none; }
+  .cycle-hub { position: static; transform: none; width: auto; aspect-ratio: auto; border-radius: var(--radius); padding: 16px; }
+  .cycle { position: static; display: grid; gap: 26px; }
+  .cycle-node { position: relative; inset: auto; transform: none; }
+  .cycle-node:not(:last-child)::after {
+    content: "↓"; position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%);
+    color: var(--coral); font-weight: 800; font-size: 1.2rem; line-height: 1;
+  }
+  .cycle-card { position: static; width: auto; transform: none; }
+}
+
 /* ---------- small screens ---------- */
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; }
