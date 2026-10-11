@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The gods · AI Stream Town</title>
+<meta name="description" content="Who the gods are, what they can ask Numan for, and how he decides whether to say yes.">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html">🤖 AI Stream Town</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="numan.html">Numan</a>
+      <a href="the-gods.html">The gods</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="ai-models.html">AI models</a>
+      <a href="run-it.html">Run it</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">The audience</span>
+      <h1>You are a god. Numan still decides.</h1>
+      <p class="lead">Gods suggest. Numan listens, weighs the request against how he is feeling, and then honors it, puts it off, or politely says no.</p>
+    </div>
+  </section>
+
+  <h2>What a god can ask for</h2>
+  <div class="grid">
+    <div class="card"><h3>🏗️ Build</h3><p>Campfire, straw bed, workbench or hut.</p></div>
+    <div class="card"><h3>🔨 Craft</h3><p>Rope, stone axe, stone pickaxe or berry stew.</p></div>
+    <div class="card"><h3>🪵 Gather</h3><p>Wood, stone, fiber or oil berries.</p></div>
+    <div class="card"><h3>💃 Activity</h3><p>Stargaze, sit by the fire, watch clouds, dance, or wave at the sky.</p></div>
+    <div class="card"><h3>🛌 Basics</h3><p>Eat, sleep or explore.</p></div>
+  </div>
+
+  <h2>What happens to a request</h2>
+  <ol class="steps">
+    <li><b>It joins the queue.</b> Up to 5 requests wait at once. Extras are dropped.</li>
+    <li><b>Numan thinks.</b> The AI brain sees the request, his needs, and his mood.</li>
+    <li><b>He answers in character.</b> He honors it, delays it, or refuses, with a short line.</li>
+    <li><b>Survival comes first.</b> If he is starving or exhausted, he takes care of that before anything else.</li>
+  </ol>
+
+  <div class="callout">
+    <p><b>Example refusal:</b> "A volcano inside the town? Bold. No." Refusals are part of the fun, and they stop chaos from taking over the island.</p>
+  </div>
+
+  <h2>Today vs. later</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3><span class="badge badge-live">Live</span> Operator panel</h3>
+      <p>The streamer sends requests from the <code>?ops</code> panel, or over a WebSocket connection. This is how every god request works right now.</p>
+    </div>
+    <div class="card">
+      <h3><span class="badge badge-soon">Next</span> Chat hookup</h3>
+      <p>A Twitch bridge would turn chat messages into requests. It needs a word filter and rate limits first.</p>
+    </div>
+  </div>
+
+  <h3>For the curious: what a request looks like</h3>
+  <p>Requests are small JSON messages. The sim checks each one and ignores anything it does not understand.</p>
+  <pre><code>{ "type": "goal", "goal": { "type": "build", "kind": "hut" } }</code></pre>
+
+  <div class="callout">
+    <p><b>Safety:</b> viewer text is cleaned before use: control characters, hidden tricks and extra-long messages are removed. Text only ever shows as plain words, never as code.</p>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>AI Stream Town · <span data-year></span></span>
+    <nav aria-label="Footer">
+      <a href="roadmap.html">Roadmap</a>
+      <a href="faq.html">FAQ</a>
+      <a href="../docs/AGENT-LOOP.md">Agent loop design</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

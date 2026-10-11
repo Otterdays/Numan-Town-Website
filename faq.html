@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAQ · AI Stream Town</title>
+<meta name="description" content="Quick answers: is Numan a real AI, is it safe, does it need the internet or a GPU, and where do the code and docs live.">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html">🤖 AI Stream Town</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="numan.html">Numan</a>
+      <a href="the-gods.html">The gods</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="ai-models.html">AI models</a>
+      <a href="run-it.html">Run it</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Questions</span>
+      <h1>Quick answers.</h1>
+      <p class="lead">The short version of the questions people ask most.</p>
+    </div>
+  </section>
+
+  <details open>
+    <summary>Is Numan a real AI?</summary>
+    <p>Partly. A local language model called Ornith 9B picks his next goal and says a short line about every 15 seconds. It runs on the streamer's PC. The sim checks every answer and only uses ones that fit the rules. Without the model, Numan follows simple instinct rules and the island keeps running.</p>
+  </details>
+
+  <details>
+    <summary>Does it send my data anywhere?</summary>
+    <p>The sim listens only on this PC (<code>127.0.0.1</code>) by default. The brain and memory run locally through Ollama and llama.cpp. Nothing is sent to a cloud AI service by the project itself. Downloads (npm packages, the model file) do need the internet once.</p>
+  </details>
+
+  <details>
+    <summary>Can a random viewer break it?</summary>
+    <p>Not from the outside. Connections are checked, messages are rate-limited, viewer text is cleaned, and operator commands need a token once you set one. Chat is not connected to the island yet, so there is no open door for viewers today.</p>
+  </details>
+
+  <details>
+    <summary>Does it need a GPU?</summary>
+    <p>For the brain, yes in practice. The model is about 6.7 GB and we only tested it on a 16 GB AMD card. Smaller setups are untested. Without a GPU or without Ollama, Numan still runs on instincts.</p>
+  </details>
+
+  <details>
+    <summary>Does it need the internet while streaming?</summary>
+    <p>The sim itself does not need it. You need it for the first setup (downloads) and for sending the stream to Twitch or YouTube through OBS.</p>
+  </details>
+
+  <details>
+    <summary>Can viewers talk to Numan?</summary>
+    <p>Not yet. Today the streamer sends god requests from the operator panel. A Twitch bridge is planned and needs a word filter and rate limits first. See the <a href="roadmap.html">roadmap</a>.</p>
+  </details>
+
+  <details>
+    <summary>Why did he say no?</summary>
+    <p>The brain weighs each request against his needs and mood. If he is hungry or tired, survival comes first. Refusals are part of the show. He answers in character, in a short line.</p>
+  </details>
+
+  <details>
+    <summary>Does he remember past days?</summary>
+    <p>Yes. Notable moments are stored as memories and searched by meaning when the brain decides. He writes a journal each night. A new era starts with a fresh island, but his memories come with him.</p>
+  </details>
+
+  <details>
+    <summary>Is it copying a TV show?</summary>
+    <p>No. It is an original world. The idea was inspired by <i>The Truman Show</i>, but none of its characters or places are used.</p>
+  </details>
+
+  <details>
+    <summary>Can I get the same island again?</summary>
+    <p>Yes. The <code>WORLD_SEED</code> setting in <code>.env</code> sets the layout. The same seed gives the same island.</p>
+  </details>
+
+  <details>
+    <summary>Where is the code and the docs?</summary>
+    <p>The simulation is in <code>sim/</code>, the screen is in <code>client/</code>, and the design notes are in <code>docs/</code>. This site is in <code>website/</code>. Start with <a href="../docs/SUMMARY.md">SUMMARY.md</a> for a status overview.</p>
+  </details>
+
+  <details>
+    <summary>Something is broken. Now what?</summary>
+    <p>Run <code>test.bat quick</code> to see whether the basics still pass. Check the terminal window for error lines. The <a href="run-it.html">Run it</a> page lists the settings and tests. Known issues are on the <a href="roadmap.html">roadmap</a>.</p>
+  </details>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>AI Stream Town · <span data-year></span></span>
+    <nav aria-label="Footer">
+      <a href="roadmap.html">Roadmap</a>
+      <a href="run-it.html">Run it</a>
+      <a href="../README.md">README</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

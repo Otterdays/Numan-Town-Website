@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI models · AI Stream Town</title>
+<meta name="description" content="Which AI models run Numan's brain, memory and voice, and which voice options we are weighing.">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html">🤖 AI Stream Town</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="numan.html">Numan</a>
+      <a href="the-gods.html">The gods</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="ai-models.html">AI models</a>
+      <a href="run-it.html">Run it</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">The models</span>
+      <h1>Three jobs, three models. All local.</h1>
+      <p class="lead">Nothing goes to a cloud service. Everything runs on the streamer's own PC, on a graphics card and the built-in graphics of the CPU.</p>
+    </div>
+  </section>
+
+  <h2>What runs today</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Job</th><th>Model</th><th>Where it runs</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🧠 <b>Numan's brain</b><br><span class="small">Picks goals and speaks. Writes the nightly journal.</span></td>
+          <td><b>Ornith-1.5-9B</b>, 4-bit quantized (Q4_K_M)<br><span class="small">Via Ollama</span></td>
+          <td>RX 7800 XT (16 GB), fully on the GPU</td>
+          <td><span class="badge badge-live">Live</span><br><span class="small">About 1–2.5 s per decision</span></td>
+        </tr>
+        <tr>
+          <td>📚 <b>Memory</b><br><span class="small">Finds past moments by meaning.</span></td>
+          <td><b>embeddinggemma-2</b>, 8-bit (Q8_0)<br><span class="small">Via llama.cpp, 256-number vectors</span></td>
+          <td>Ryzen built-in GPU (<code>Vulkan1</code>). Frees about 600 MB of the RX 7800 XT's memory.</td>
+          <td><span class="badge badge-live">Live</span></td>
+        </tr>
+        <tr>
+          <td>🗣️ <b>Voice</b><br><span class="small">Reads Numan's lines out loud.</span></td>
+          <td>Not picked yet. Three candidates below.</td>
+          <td>CPU</td>
+          <td><span class="badge badge-soon">Planned</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p><b>Why these?</b> Ornith is small enough to run fast on a 16 GB card, and it answers in JSON on request. embeddinggemma-2 is small, so it runs on the CPU's built-in graphics and leaves the big card's memory free for Ornith.</p>
+  </div>
+
+  <h2>What embeddinggemma-2 is for</h2>
+  <p>Ornith-1.5-9B, Numan's brain, can only read what fits in its prompt. It cannot keep every past moment there. embeddinggemma-2 is the small model that solves this: it turns each memory into a list of 256 numbers, called an embedding. Memories that mean similar things end up with similar numbers, so the sim can search for "the last time I was hungry" even if the words are different.</p>
+  <ol class="steps">
+    <li><b>Save.</b> A notable event, like "I built a hut", is turned into numbers and stored.</li>
+    <li><b>Search.</b> Before a decision, the sim turns the current situation into numbers too and finds the closest matches.</li>
+    <li><b>Pick.</b> Matches are ranked by how relevant, how recent, and how important they are. The top 6 go into Ornith's prompt.</li>
+  </ol>
+  <p class="small">It does not decide anything and it does not write text. It only finds memories. Ornith-1.5-9B is the model that reads them and decides. The short insights from his nightly journal also become memories, so they can be found later too.</p>
+
+  <h2>Voice options we are weighing</h2>
+  <p>Roughly ordered by reported size (Piper's size was not in our sources). Sizes and quality come from web sources and are <b>not measured on our PC yet</b>.</p>
+
+  <div class="grid">
+    <div class="card">
+      <span class="badge badge-live">Smallest reported</span>
+      <h3>KittenTTS</h3>
+      <p>CPU only, Apache 2.0. Nano is about 15M parameters (roughly 25–56 MB). Micro is about 40M (about 41 MB). Mini is about 80M (about 80 MB).</p>
+      <p class="small">English only. Developer preview (v0.8). Sizes differ between sources, so check the files.</p>
+    </div>
+    <div class="card">
+      <span class="badge badge-soon">Proven</span>
+      <h3>Piper</h3>
+      <p>CPU only, runs on a Raspberry Pi 4. The most voices (904). GPL-3.0-or-later license.</p>
+      <p class="small">Quality estimate is lower than Kokoro's (MOS 3.8–4.0, informal test).</p>
+    </div>
+    <div class="card">
+      <span class="badge badge-idea">Best sound</span>
+      <h3>Kokoro</h3>
+      <p>82M parameters, Apache-2.0. Sounds better (MOS 4.3–4.5, informal test). Heavier than the other two.</p>
+      <p class="small">Can use Apple MLX on Macs. Not relevant here.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p><b>Current lean:</b> try KittenTTS micro first, with Piper as the fallback. Before picking, measure the real-time speed of each on this CPU. Nothing is decided yet.</p>
+  </div>
+
+  <h3>Not verified</h3>
+  <p class="small">MOSS-TTS-Nano-100M (about 100M parameters, file size unknown) and Pocket TTS from Kyutai (about 100M parameters, voice cloning). Both were only seen in directory listings.</p>
+
+  <h3>Sources for the voice notes</h3>
+  <ul class="small">
+    <li><a href="https://tts.ai/voices/kitten-tts/">Kitten TTS (tts.ai)</a></li>
+    <li><a href="https://www.sourcepulse.org/projects/11096489">KittenTTS by KittenML (sourcepulse)</a></li>
+    <li><a href="https://rits.shanghai.nyu.edu/ai/kittentts-state-of-the-art-voice-synthesis-in-under-25-mb/">KittenTTS: under 25 MB (NYU Shanghai)</a></li>
+    <li><a href="https://offlinetts.com/blog/browser-tts-showdown-kokoro-piper-kitten/">Browser TTS showdown: Kokoro vs Piper vs Kitten (offlinetts)</a></li>
+    <li><a href="https://www.promptquorum.com/power-local-llm/piper-vs-kokoro-tts">Piper vs Kokoro TTS (PromptQuorum)</a></li>
+    <li><a href="https://aiindigo.com/tool/moss-tts-nano-100m-1">MOSS-TTS-Nano-100M (AI Indigo)</a></li>
+  </ul>
+
+  <h2>Models we are not using</h2>
+  <p>The docs also name a larger 35B model (<code>Ornith-1.5-35B-A3B</code>). It might be smarter but slower, so it only gets tried if the 9B is not good enough. The file NVFP4 (NVIDIA-only) cannot run on this AMD card, so it is out.</p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>AI Stream Town · <span data-year></span></span>
+    <nav aria-label="Footer">
+      <a href="roadmap.html">Roadmap</a>
+      <a href="faq.html">FAQ</a>
+      <a href="../docs/BRAIN.md">Brain doc</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

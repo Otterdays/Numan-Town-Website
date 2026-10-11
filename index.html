@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Stream Town</title>
+<meta name="description" content="A live stream of Numan, a small robot on a floating island. Viewers are the gods; a local AI brain decides what he does.">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html">🤖 AI Stream Town</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="numan.html">Numan</a>
+      <a href="the-gods.html">The gods</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="ai-models.html">AI models</a>
+      <a href="run-it.html">Run it</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Live robot life sim</span>
+      <h1>Numan lives on a floating island. You get to suggest what he does.</h1>
+      <p class="lead">Numan gathers, crafts, builds and takes care of himself. Viewers are the gods. Their ideas reach him, and his local AI brain decides what to do with them.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="numan.html">Meet Numan</a>
+        <a class="btn btn-ghost" href="how-it-works.html">How it works</a>
+      </div>
+    </div>
+
+    <aside class="card status-card" aria-label="Current status">
+      <h3>Right now</h3>
+      <ul>
+        <li>Day and night cycle <span class="badge badge-live">Live</span></li>
+        <li>Numan's AI brain <span class="badge badge-live">Live</span></li>
+        <li>Memory and nightly journal <span class="badge badge-live">Live</span></li>
+        <li>Twitch chat hookup <span class="badge badge-soon">Next</span></li>
+        <li>Donations and sub rewards <span class="badge badge-idea">Idea</span></li>
+      </ul>
+      <p class="small">Status as of 2026-10-10 (v0.4.0).</p>
+    </aside>
+  </section>
+
+  <section>
+    <h2 class="section-title">Three things to know</h2>
+    <div class="grid">
+      <a class="card" href="numan.html">
+        <h3>🤖 Numan has a life</h3>
+        <p>He has 8 needs, like a Tamagotchi. Eat, sleep, gather and build, or he gets grumpy.</p>
+      </a>
+      <a class="card" href="the-gods.html">
+        <h3>🙏 The gods suggest</h3>
+        <p>Viewers send requests like "build a hut." Numan decides whether to do it, later, or not at all.</p>
+      </a>
+      <a class="card" href="ai-models.html">
+        <h3>🧠 A local AI decides</h3>
+        <p>A language model runs on the streamer's own PC. Nothing goes to a cloud service.</p>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">How a viewer's idea reaches Numan</h2>
+    <p>One message, five stops. Viewers never control Numan directly.</p>
+    <figure class="relay-figure">
+      <ol class="relay">
+        <li class="relay-step">
+          <span class="relay-icon" aria-hidden="true">💬</span>
+          <b>1. A viewer types</b>
+          <span>"Build a hut!"</span>
+        </li>
+        <li class="relay-step planned">
+          <span class="relay-icon" aria-hidden="true">📮</span>
+          <b>2. Chat carries it</b>
+          <span class="badge badge-soon">Planned</span>
+          <span>Today the streamer's panel sends it instead.</span>
+        </li>
+        <li class="relay-step">
+          <span class="relay-icon" aria-hidden="true">🖥️</span>
+          <b>3. The sim checks it</b>
+          <span>Cleans the text, drops junk, keeps up to 5 in a queue.</span>
+        </li>
+        <li class="relay-step">
+          <span class="relay-icon" aria-hidden="true">🧠</span>
+          <b>4. The AI brain weighs it</b>
+          <span>About every 15 s, when Numan is free: yes, later, or no.</span>
+        </li>
+        <li class="relay-step">
+          <span class="relay-icon" aria-hidden="true">🤖</span>
+          <b>5. Numan acts</b>
+          <span>Survival comes first, so a hungry Numan eats before he builds.</span>
+        </li>
+      </ol>
+      <figcaption class="small">Simplified. The real code has more checks at each stop.</figcaption>
+    </figure>
+    <div class="callout">
+      <p><b>Who has the final say?</b> Survival beats the brain. The brain beats viewer requests. The brain only picks from a fixed list of actions, and it never runs code.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Run it in three steps</h2>
+    <ol class="steps">
+      <li>Install <b>Node.js 20.12+</b>.</li>
+      <li>Double-click <code>start.bat</code> in the project folder.</li>
+      <li>Open <code>http://127.0.0.1:8787/?ops</code> if it doesn't open by itself.</li>
+    </ol>
+    <p><a href="run-it.html">Full setup guide →</a></p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>AI Stream Town · <span data-year></span></span>
+    <nav aria-label="Footer">
+      <a href="roadmap.html">Roadmap</a>
+      <a href="faq.html">FAQ</a>
+      <a href="../docs/SUMMARY.md">Project docs</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

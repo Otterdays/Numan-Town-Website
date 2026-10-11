@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Run it · AI Stream Town</title>
+<meta name="description" content="How to start Numan's world on your own PC: requirements, the one-click launcher, URL options, OBS setup and tests.">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html">🤖 AI Stream Town</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="numan.html">Numan</a>
+      <a href="the-gods.html">The gods</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="ai-models.html">AI models</a>
+      <a href="run-it.html">Run it</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Get it running</span>
+      <h1>Start Numan's world in about a minute.</h1>
+      <p class="lead">Windows is the tested path. You need Node.js. Ollama is optional, and without it Numan just follows his instincts.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#quick-start">Quick start</a>
+        <a class="btn btn-ghost" href="#obs">OBS setup</a>
+      </div>
+    </div>
+  </section>
+
+  <h2>What you need</h2>
+  <div class="grid">
+    <div class="card"><h3>Required: Node.js</h3><p>Version <b>20.12 or newer</b>. Get it from nodejs.org.</p></div>
+    <div class="card"><h3>Optional: Ollama</h3><p>Runs the AI brain. Pull the model once, then leave it running.</p></div>
+    <div class="card"><h3>Optional: a GPU</h3><p>Helps the AI brain stay fast. Tested on a 16 GB AMD card.</p></div>
+  </div>
+
+  <h2 id="quick-start">Quick start</h2>
+  <h3>Option 1: double-click</h3>
+  <ol class="steps">
+    <li>Open the project folder and double-click <code>start.bat</code>.</li>
+    <li>It installs what it needs, starts the sim, and opens the control page.</li>
+  </ol>
+
+  <h3>Option 2: by hand</h3>
+  <ol class="steps">
+    <li>Open a terminal in the project folder.</li>
+    <li>Run these three commands:
+      <pre><code>cd sim
+npm install
+npm start</code></pre>
+    </li>
+    <li>Open <code>http://127.0.0.1:8787/?ops</code> in your browser.</li>
+  </ol>
+
+  <h3>Just want to read this site?</h3>
+  <ol class="steps">
+    <li>Double-click <code>start-website.bat</code> in the project folder.</li>
+    <li>It starts a small local server and opens the site at <code>http://127.0.0.1:8080/website/</code>. It needs Node.js only, no install.</li>
+  </ol>
+  <p class="small">The sim does not need to run for this. Close the "AI Stream Town site" window to stop the site.</p>
+
+  <h3>Turn on the AI brain (optional)</h3>
+  <pre><code>ollama pull hf.co/ornith-ai/Ornith-1.5-9B-GGUF:Q4_K_M</code></pre>
+  <p class="small">The HUD shows 🧠 <b>instincts</b> if the AI is off, and 🧠 <b>on</b> when it is running.</p>
+
+  <h2>Page options</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Add to the address</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>?ops</code></td><td>Opens the operator panel: speed (1×, 10×, 60×), say something, and <b>New era (reset)</b>.</td></tr>
+        <tr><td><code>?obs</code></td><td>Clean view for OBS. Press <b>H</b> to show or hide the UI.</td></tr>
+        <tr><td><code>?free</code></td><td>The camera does not follow Numan.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small">If the sim has an operator token set, use <code>?ops=YOUR_TOKEN</code> to unlock reset and speed.</p>
+
+  <h2 id="obs">OBS setup</h2>
+  <ol class="steps">
+    <li>Add a <b>Browser Source</b>.</li>
+    <li>Set the URL to <code>http://127.0.0.1:8787/?obs</code>.</li>
+    <li>Set the size to <b>1920 × 1080</b>.</li>
+    <li>Put your webcam, alerts and chat on top as usual.</li>
+  </ol>
+
+  <h2>Settings</h2>
+  <p>Copy <code>.env.example</code> to <code>.env</code> and change what you need. Anything you leave out uses the default.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Setting</th><th>What it controls</th></tr></thead>
+      <tbody>
+        <tr><td><code>TIME_SCALE</code></td><td>Game speed. 1 means one in-game day every 24 real minutes.</td></tr>
+        <tr><td><code>WORLD_SEED</code></td><td>Which island you get. Same seed, same island.</td></tr>
+        <tr><td><code>MIND_ENABLED</code></td><td>Turns the AI brain on or off.</td></tr>
+        <tr><td><code>MEMORY_ENABLED</code></td><td>Turns memory and the journal on or off.</td></tr>
+        <tr><td><code>OPS_TOKEN</code></td><td>Password for operator commands. Required if the sim is reachable from another PC (16+ characters).</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Saving and starting over</h2>
+  <p>The world autosaves every 30 seconds (<code>SAVE_EVERY_SEC</code>). <b>New era (reset)</b> in the operator panel starts a fresh island and carries Numan's memories into it, so he remembers the last era. Journal entries are saved in the world file too, and a readable copy goes to <code>saves/journal.md</code>, which a reset leaves alone.</p>
+  <p class="small">Want a clean slate? Stop the sim and delete <code>saves/world.json</code>. Memories are stored inside the world file, so they go too. Back the file up first if you want to keep them.</p>
+
+  <div class="callout">
+    <p><b>Crash restart:</b> <code>start.bat</code> restarts the sim after an error, after a 3-second pause. This loop is still being tested, so keep an eye on the window during the first streams.</p>
+  </div>
+
+  <h2>Run the tests</h2>
+  <p>From the project folder, run <code>test.bat</code>. Three modes:</p>
+  <ul>
+    <li><code>test.bat quick</code>: unit, fuzz and end-to-end tests. About 20 seconds.</li>
+    <li><code>test.bat</code>: the above, plus 20 seeds of 30 game days and live-server abuse tests. About 2 minutes.</li>
+    <li><code>test.bat long</code>: everything, plus a 5-minute stress run and a 365-day soak. Over 10 minutes.</li>
+  </ul>
+  <p class="small">Run the full version before going live.</p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>AI Stream Town · <span data-year></span></span>
+    <nav aria-label="Footer">
+      <a href="roadmap.html">Roadmap</a>
+      <a href="faq.html">FAQ</a>
+      <a href="../README.md">README</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

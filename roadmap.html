@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roadmap · AI Stream Town</title>
+<meta name="description" content="What has shipped, what is in hardening, and what comes next for AI Stream Town.">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html">🤖 AI Stream Town</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="numan.html">Numan</a>
+      <a href="the-gods.html">The gods</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="ai-models.html">AI models</a>
+      <a href="run-it.html">Run it</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Where we are</span>
+      <h1>What is done, what is being hardened, what is next.</h1>
+      <p class="lead">Versions are in <code>CHANGELOG.md</code>. Nothing here is a promise with a date on it.</p>
+    </div>
+  </section>
+
+  <h2>Done</h2>
+  <div class="timeline">
+    <div class="card">
+      <span class="badge badge-live">0.4.0</span>
+      <h3>Memory and a nightly journal</h3>
+      <p>Numan remembers notable moments and searches them by meaning. Each night he writes a journal entry. Memory carries over when a new era starts.</p>
+    </div>
+    <div class="card">
+      <span class="badge badge-live">0.3.0</span>
+      <h3>The AI brain</h3>
+      <p>A local model (Ornith 9B) picks his next goal and says a short line about every 15 seconds. The sim checks every answer before using it.</p>
+    </div>
+    <div class="card">
+      <span class="badge badge-live">0.2.0</span>
+      <h3>The island and the sim</h3>
+      <p>A life sim with a clock, 8 needs, resources that regrow, recipes, buildings, a planner, and god requests. The screen draws what the sim says.</p>
+    </div>
+  </div>
+
+  <h2>In progress: hardening</h2>
+  <p>Shipped after 0.4.0 but not yet tagged. This is the security and stability pass.</p>
+  <ul>
+    <li>Host and Origin checks, rate limits, client cap, and an operator token for reset and speed.</li>
+    <li>Text from viewers is cleaned before anything uses it.</li>
+    <li>The game clock now runs on real elapsed time. It had been about 9% slow on Windows.</li>
+    <li>A crash that a single odd message could cause is fixed.</li>
+    <li>89 automated tests, plus a 27-check live-server test.</li>
+  </ul>
+
+  <h2>Next, roughly in order</h2>
+  <div class="next">
+    <div class="card"><h3>1. Stability pack</h3><p>Rotating backups and save migrations. A stuck-loop watchdog, a health page, and a crash-restart test for <code>start.bat</code>.</p></div>
+    <div class="card"><h3>2. Efficiency pack</h3><p>Send only changes to the screen, draw repeated objects in one batch, and cap how long each brain answer can run.</p></div>
+    <div class="card"><h3>3. Voice</h3><p>Pick a text-to-speech option after measuring it on the streaming PC. See <a href="ai-models.html">AI models</a> for the three candidates.</p></div>
+  </div>
+
+  <h2>Later</h2>
+  <div class="later">
+    <div class="card"><h3>More island tiers</h3><p>Kiln and bricks, paths, a villager who helps, and later a forge, farming, and weather.</p></div>
+    <div class="card"><h3>Chat hookup</h3><p>A Twitch bridge would turn chat into god requests. It needs a word filter and rate limits first.</p></div>
+    <div class="card"><h3>Awareness arc</h3><p>Numan slowly notices he is being watched. Each era would end with a finale.</p></div>
+  </div>
+
+  <h2>Known rough edges</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Issue</th><th>What it means for you</th></tr></thead>
+      <tbody>
+        <tr><td>The restart loop in <code>start.bat</code> is not yet tested.</td><td>Watch the window during the first few streams.</td></tr>
+        <tr><td>Canned instinct lines can talk over the brain's speech.</td><td>Cosmetic. Muting the canned lines while the brain is on is planned.</td></tr>
+        <tr><td>The brain sometimes turns down a repeated request, like a second campfire.</td><td>Working as designed for now. A "refused" log line is planned.</td></tr>
+        <tr><td>Only tested on a 16 GB AMD GPU and one Ryzen CPU.</td><td>Other hardware may need different settings.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <p><b>Want the detail?</b> The full plan lives in the docs folder: <a href="../docs/SUMMARY.md">SUMMARY</a>, <a href="../docs/TEST-ROADMAP.md">test roadmap</a>, and <a href="../docs/DEEPER-SIM.md">deeper sim notes</a>.</p>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>AI Stream Town · <span data-year></span></span>
+    <nav aria-label="Footer">
+      <a href="faq.html">FAQ</a>
+      <a href="run-it.html">Run it</a>
+      <a href="../docs/CHANGELOG.md">Changelog</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

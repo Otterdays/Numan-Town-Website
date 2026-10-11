@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How it works · AI Stream Town</title>
+<meta name="description" content="The system behind AI Stream Town, explained at a high-school level: the sim, the AI brain, memory, the screen and the stream.">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="index.html">🤖 AI Stream Town</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="numan.html">Numan</a>
+      <a href="the-gods.html">The gods</a>
+      <a href="how-it-works.html">How it works</a>
+      <a href="ai-models.html">AI models</a>
+      <a href="run-it.html">Run it</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="container">
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Under the hood</span>
+      <h1>Five parts, one rule: the sim is the boss.</h1>
+      <p class="lead">Only the sim can change the world. The AI can suggest, and the screen only draws what the sim says.</p>
+    </div>
+  </section>
+
+  <h2>The big picture</h2>
+  <div class="flow" aria-label="System layers, top to bottom">
+    <div class="flow-node planned">
+      <h3>💬 Chat (planned)</h3>
+      <p>Twitch messages would become god requests. Not connected yet. Today, requests come from the operator panel or a WebSocket.</p>
+    </div>
+    <div class="flow-link">↓ requests, over WebSocket</div>
+    <div class="flow-node">
+      <h3>🖥️ The sim (Node.js)</h3>
+      <p>The one true world. It runs the clock, needs, resources, crafting, building, and saving. It validates everything before it changes anything.</p>
+    </div>
+    <div class="flow-link">↕ the sim asks the brain for a decision, and the brain's answer is checked before use</div>
+    <div class="flow-node">
+      <h3>🧠 The AI brain (Ollama + Ornith 9B)</h3>
+      <p>A local language model. It returns a short JSON answer: a thought, a line of speech, and a goal. The sim checks it before using it.</p>
+    </div>
+    <div class="flow-link">↕ "what do I remember?" and "remember this"</div>
+    <div class="flow-node memory">
+      <h3>📚 Memory (embeddings + nightly journal)</h3>
+      <p><b>embeddinggemma-2</b> turns notable events into numbers, so they can be searched by meaning. Before each decision it finds the 6 most useful memories for the brain, Ornith-1.5-9B. At night Numan writes a short journal, and the insights from it are saved as memories too.</p>
+    </div>
+    <div class="flow-link">↓ snapshots, 5 times per second</div>
+    <div class="flow-node">
+      <h3>🎨 The screen (three.js in the browser)</h3>
+      <p>Draws the island, Numan, the day and night, and the HUD. It has no game logic of its own.</p>
+    </div>
+    <div class="flow-link">↓ captured by OBS</div>
+    <div class="flow-node">
+      <h3>📡 The stream</h3>
+      <p>OBS shows the page at 1920×1080 and sends it to Twitch or YouTube.</p>
+    </div>
+  </div>
+
+  <h2>The heartbeat</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>What</th><th>How often</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Sim tick</td><td>every 0.1 s</td><td>Moves time forward and updates needs</td></tr>
+        <tr><td>Snapshot to the screen</td><td>5 times per second</td><td>Keeps the picture smooth without flooding the network</td></tr>
+        <tr><td>Mind decision</td><td>about every 15 s, only when Numan is free</td><td>Gives him a fresh goal without blocking the sim</td></tr>
+        <tr><td>Autosave</td><td>every 30 s</td><td>Keeps the world safe if the PC restarts</td></tr>
+        <tr><td>Journal</td><td>once a night, while he sleeps</td><td>Turns the day into memories</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Who gets the final say?</h2>
+  <ol class="steps">
+    <li><b>Survival comes first.</b> Eating and sleeping are rule-based, so a slow or wrong AI answer cannot starve him.</li>
+    <li><b>The AI proposes.</b> It only picks from a short fixed list of actions. It never runs code.</li>
+    <li><b>The sim checks.</b> Unknown or broken answers are ignored, and the sim logs a warning.</li>
+    <li><b>The screen just shows.</b> It cannot change the world.</li>
+  </ol>
+
+  <div class="callout">
+    <p><b>If something breaks, the island keeps going.</b> No AI? He follows instincts. Memory server down? He just skips recall. The sim keeps ticking either way.</p>
+  </div>
+
+  <h2>Locked down by default</h2>
+  <p>The sim listens only on this PC (<code>127.0.0.1</code>). It checks the Host and Origin of every connection, limits how many messages each client can send, and caps how many viewers can connect. Operator commands like reset and speed can be locked behind a token. Viewer text is cleaned before anything uses it.</p>
+
+  <h2>Words you might hear</h2>
+  <div class="grid-2">
+    <div class="card"><h3>LLM</h3><p>Large language model: the AI behind chatbots. Numan's is small and local.</p></div>
+    <div class="card"><h3>Ollama</h3><p>A free program that runs AI models on your own computer.</p></div>
+    <div class="card"><h3>Quantized</h3><p>A model squeezed to a smaller size so it fits on a gaming GPU. Some quality is lost.</p></div>
+    <div class="card"><h3>Embeddings</h3><p>Turning text into a list of numbers, so similar ideas get similar numbers. That is how memory search works.</p></div>
+    <div class="card"><h3>JSON</h3><p>A simple text format like <code>{"type": "build"}</code>. Easy for computers to read.</p></div>
+    <div class="card"><h3>WebSocket</h3><p>A two-way connection, so the sim and the screen can talk live.</p></div>
+    <div class="card"><h3>Node.js</h3><p>Lets JavaScript run on a computer, not only in a browser.</p></div>
+    <div class="card"><h3>three.js</h3><p>A library that draws 3D scenes in a web page.</p></div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>AI Stream Town · <span data-year></span></span>
+    <nav aria-label="Footer">
+      <a href="roadmap.html">Roadmap</a>
+      <a href="faq.html">FAQ</a>
+      <a href="../docs/ARCHITECTURE.md">Architecture doc</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
